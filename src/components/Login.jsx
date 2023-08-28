@@ -1,9 +1,31 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../provider/AuthProviders";
 
 const Login = () => {
   const [control, setControl] = useState(false);
+  const { logIn } = useContext(UserContext);
+
+  const handleLogIn = (event) => {
+    event.preventDefault();
+
+    // get data
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    logIn(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        form.reset();
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
+
   return (
-    <div>
+    <form onSubmit={handleLogIn}>
       <h1 className="text-2xl mt-5 mb-24 font-bold">Please Log in!!!</h1>
 
       <div className="form-control w-full max-w-xs">
@@ -26,6 +48,7 @@ const Login = () => {
         {control ? (
           <input
             type="text"
+            name="password"
             placeholder="*******"
             title="Password must me 6 character with one Uppercase, one number and one special character(!@#$&*)"
             className="input input-bordered w-full max-w-xs"
@@ -34,6 +57,7 @@ const Login = () => {
         ) : (
           <input
             type="Password"
+            name="password"
             placeholder="*******"
             title="Password must me 6 character with one Uppercase, one number and one special character(!@#$&*)"
             className="input input-bordered w-full max-w-xs"
@@ -48,7 +72,7 @@ const Login = () => {
 
       <p className="mt-3 text-red-600"></p>
 
-      <button className="btn btn-active">Register</button>
+      <button className="btn btn-active">Log in</button>
 
       <div className="mt-5 sign-in-btn">
         <button className="btn btn-active btn-accent">
@@ -58,7 +82,7 @@ const Login = () => {
           Log in with Github
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 

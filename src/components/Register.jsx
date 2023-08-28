@@ -4,6 +4,7 @@ import { UserContext } from "../provider/AuthProviders";
 const Register = () => {
   const [control, setControl] = useState(false);
   const { signUp } = useContext(UserContext);
+
   const handleRegister = (event) => {
     event.preventDefault();
 
@@ -11,16 +12,16 @@ const Register = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    
+
     signUp(email, password)
-    .then(result => {
-      const loggedUser = result.user;
-      form.reset()
-    })
-    .catch(error => {
-      const errorMessage = error.message;
-      console.log(errorMessage)
-    })
+      .then((result) => {
+        const loggedUser = result.user;
+        form.reset();
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
   };
   return (
     <form onSubmit={handleRegister}>
