@@ -61,9 +61,11 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to="/profile" className="text-xl font-semibold">
-              Profile
-            </Link>
+            {user && (
+              <Link to="/profile" className="text-xl font-semibold">
+                Profile
+              </Link>
+            )}
           </li>
           <li>
             <Link to="/register-login" className="text-xl font-semibold">
