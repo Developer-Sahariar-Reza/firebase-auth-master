@@ -49,56 +49,60 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleLogIn}>
-      <h1 className="text-2xl mt-5 mb-24 font-bold">Please Log in!!!</h1>
+    <div>
+      <form onSubmit={handleLogIn}>
+        <h1 className="text-2xl mt-5 mb-24 font-bold">Please Log in!!!</h1>
 
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Your Email</span>
-        </label>
-        <input
-          type="email"
-          name="email"
-          placeholder="harry-potter@hogwarts.com"
-          className="input input-bordered w-full max-w-xs"
-          required
-        />
-      </div>
-
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Your Password</span>
-        </label>
-        {control ? (
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Your Email</span>
+          </label>
           <input
-            type="text"
-            name="password"
-            placeholder="*******"
-            title="Password must me 6 character with one Uppercase, one number and one special character(!@#$&*)"
+            type="email"
+            name="email"
+            placeholder="harry-potter@hogwarts.com"
             className="input input-bordered w-full max-w-xs"
             required
           />
-        ) : (
-          <input
-            type="Password"
-            name="password"
-            placeholder="*******"
-            title="Password must me 6 character with one Uppercase, one number and one special character(!@#$&*)"
-            className="input input-bordered w-full max-w-xs"
-            required
-          />
-        )}
-      </div>
+        </div>
 
-      <p className="link link-hover mt-3" onClick={() => setControl(!control)}>
-        {control ? <span>Hide Password</span> : <span>Show Password</span>}
-      </p>
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Your Password</span>
+          </label>
+          {control ? (
+            <input
+              type="text"
+              name="password"
+              placeholder="*******"
+              title="Password must me 6 character with one Uppercase, one number and one special character(!@#$&*)"
+              className="input input-bordered w-full max-w-xs"
+              required
+            />
+          ) : (
+            <input
+              type="Password"
+              name="password"
+              placeholder="*******"
+              title="Password must me 6 character with one Uppercase, one number and one special character(!@#$&*)"
+              className="input input-bordered w-full max-w-xs"
+              required
+            />
+          )}
+        </div>
 
-      <p className="mt-3 text-red-600"></p>
+        <p
+          className="link link-hover mt-3"
+          onClick={() => setControl(!control)}
+        >
+          {control ? <span>Hide Password</span> : <span>Show Password</span>}
+        </p>
 
-      <button className="btn btn-active">Log in</button>
+        <p className="mt-3 text-red-600"></p>
 
-      <div className="mt-5 sign-in-btn">
+        <button className="btn btn-active">Log in</button>
+      </form>
+      <div className="mt-8 sign-in-btn">
         <button
           className="btn btn-active btn-accent"
           onClick={handleGoogleLogIn}
@@ -109,7 +113,7 @@ const Login = () => {
           Log in with Github
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 
