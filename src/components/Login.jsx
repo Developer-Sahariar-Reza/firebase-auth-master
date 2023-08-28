@@ -3,7 +3,7 @@ import { UserContext } from "../provider/AuthProviders";
 
 const Login = () => {
   const [control, setControl] = useState(false);
-  const { logIn } = useContext(UserContext);
+  const { logIn, logInWithGoogle } = useContext(UserContext);
 
   const handleLogIn = (event) => {
     event.preventDefault();
@@ -21,6 +21,18 @@ const Login = () => {
       .catch((error) => {
         const errorMessage = error.message;
         console.log(errorMessage);
+      });
+  };
+
+  // Log in with google
+  const handleGoogleLogIn = () => {
+    logInWithGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(er);
       });
   };
 
@@ -75,7 +87,10 @@ const Login = () => {
       <button className="btn btn-active">Log in</button>
 
       <div className="mt-5 sign-in-btn">
-        <button className="btn btn-active btn-accent">
+        <button
+          className="btn btn-active btn-accent"
+          onClick={handleGoogleLogIn}
+        >
           Log in with Google
         </button>
         <button className="btn btn-active btn-neutral">
