@@ -3,8 +3,9 @@ import { UserContext } from "../provider/AuthProviders";
 
 const Register = () => {
   const [control, setControl] = useState(false);
-  const { signUp } = useContext(UserContext);
+  const { signUp, logInWithGoogle } = useContext(UserContext);
 
+  // register with email and password
   const handleRegister = (event) => {
     event.preventDefault();
 
@@ -23,77 +24,94 @@ const Register = () => {
         console.log(errorMessage);
       });
   };
+  // Register with Google
+  const handleGoogle = () => {
+    logInWithGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
+
   return (
-    <form onSubmit={handleRegister}>
-      <h1 className="text-2xl my-5 font-bold">Registration First!!!!</h1>
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Your Name</span>
-        </label>
-        <input
-          type="text"
-          name="name"
-          placeholder="Harry Potter"
-          className="input input-bordered w-full max-w-xs"
-          required
-        />
-      </div>
-
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Your Email</span>
-        </label>
-        <input
-          type="email"
-          name="email"
-          placeholder="harry-potter@hogwarts.com"
-          className="input input-bordered w-full max-w-xs"
-          required
-        />
-      </div>
-
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Your Password</span>
-        </label>
-        {control ? (
+    <div>
+      <form onSubmit={handleRegister}>
+        <h1 className="text-2xl my-5 font-bold">Registration First!!!!</h1>
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Your Name</span>
+          </label>
           <input
             type="text"
-            name="password"
-            placeholder="*******"
-            title="Password must me 6 character with one Uppercase, one number and one special character(!@#$&*)"
+            name="name"
+            placeholder="Harry Potter"
             className="input input-bordered w-full max-w-xs"
             required
           />
-        ) : (
+        </div>
+
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Your Email</span>
+          </label>
           <input
-            type="password"
-            name="password"
-            placeholder="*******"
-            title="Password must me 6 character with one Uppercase, one number and one special character(!@#$&*)"
+            type="email"
+            name="email"
+            placeholder="harry-potter@hogwarts.com"
             className="input input-bordered w-full max-w-xs"
             required
           />
-        )}
-      </div>
+        </div>
 
-      <p className="link link-hover mt-3" onClick={() => setControl(!control)}>
-        {control ? <span>Hide Password</span> : <span>Show Password</span>}
-      </p>
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Your Password</span>
+          </label>
+          {control ? (
+            <input
+              type="text"
+              name="password"
+              placeholder="*******"
+              title="Password must me 6 character with one Uppercase, one number and one special character(!@#$&*)"
+              className="input input-bordered w-full max-w-xs"
+              required
+            />
+          ) : (
+            <input
+              type="password"
+              name="password"
+              placeholder="*******"
+              title="Password must me 6 character with one Uppercase, one number and one special character(!@#$&*)"
+              className="input input-bordered w-full max-w-xs"
+              required
+            />
+          )}
+        </div>
 
-      <p className="mt-3 text-red-600"></p>
+        <p
+          className="link link-hover mt-3"
+          onClick={() => setControl(!control)}
+        >
+          {control ? <span>Hide Password</span> : <span>Show Password</span>}
+        </p>
 
-      <button className="btn btn-active">Register</button>
+        <p className="mt-3 text-red-600"></p>
+
+        <button className="btn btn-active">Register</button>
+      </form>
 
       <div className="mt-5 sign-in-btn">
-        <button className="btn btn-active btn-accent">
-          Log in with Google
+        <button className="btn btn-active btn-accent" onClick={handleGoogle}>
+          Register with Google
         </button>
         <button className="btn btn-active btn-neutral">
-          Log in with Github
+          Register with Github
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 
