@@ -9,5 +9,8 @@
 
 /* Register and Login Container */
 .register-login-container {
-  @apply grid grid-cols-2 gap-8;
+  @apply grid grid-cols-2 gap-8 w-3/4 mx-auto mt-12;
+}
+.sign-in-btn button {
+  @apply mr-4;
 }
