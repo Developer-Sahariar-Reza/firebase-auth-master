@@ -3,7 +3,7 @@ import { UserContext } from "../provider/AuthProviders";
 
 const Login = () => {
   const [control, setControl] = useState(false);
-  const { logIn, logInWithGoogle } = useContext(UserContext);
+  const { logIn, logInWithGoogle, logInWithGithub } = useContext(UserContext);
 
   const handleLogIn = (event) => {
     event.preventDefault();
@@ -33,6 +33,18 @@ const Login = () => {
       .catch((error) => {
         const errorMessage = error.message;
         console.log(er);
+      });
+  };
+
+  // login with github
+  const handleGithub = () => {
+    logInWithGithub()
+      .then((result) => {
+        const loggedUser = result.user;
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
       });
   };
 
@@ -93,7 +105,7 @@ const Login = () => {
         >
           Log in with Google
         </button>
-        <button className="btn btn-active btn-neutral">
+        <button className="btn btn-active btn-neutral" onClick={handleGithub}>
           Log in with Github
         </button>
       </div>
