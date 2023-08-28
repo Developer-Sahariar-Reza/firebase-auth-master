@@ -35,11 +35,17 @@ const AuthProviders = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  // register/log in with github
+  const logInWithGithub = () => {
+    return signInWithPopup(auth, githubProvider);
+  };
+
   const userInfo = {
     user,
     signUp,
     logIn,
     logInWithGoogle,
+    logInWithGithub,
   };
 
   return (

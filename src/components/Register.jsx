@@ -3,7 +3,7 @@ import { UserContext } from "../provider/AuthProviders";
 
 const Register = () => {
   const [control, setControl] = useState(false);
-  const { signUp, logInWithGoogle } = useContext(UserContext);
+  const { signUp, logInWithGoogle, logInWithGithub } = useContext(UserContext);
 
   // register with email and password
   const handleRegister = (event) => {
@@ -27,6 +27,18 @@ const Register = () => {
   // Register with Google
   const handleGoogle = () => {
     logInWithGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
+
+  // Register with github
+  const handleGithub = () => {
+    logInWithGithub()
       .then((result) => {
         const loggedUser = result.user;
       })
@@ -107,7 +119,7 @@ const Register = () => {
         <button className="btn btn-active btn-accent" onClick={handleGoogle}>
           Register with Google
         </button>
-        <button className="btn btn-active btn-neutral">
+        <button className="btn btn-active btn-neutral" onClick={handleGithub}>
           Register with Github
         </button>
       </div>
